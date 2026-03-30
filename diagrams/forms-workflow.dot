@@ -1,0 +1,56 @@
+digraph FormsWorkflow {
+    rankdir=TB;
+    bgcolor="white";
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=11, style="filled,rounded", shape=box];
+    edge [fontname="Helvetica", fontsize=10, color="#555555"];
+
+    labelloc="t";
+    label=<<FONT POINT-SIZE="18" COLOR="#1e4974"><B>Forms Workflow — From Paper to Digital</B></FONT>>;
+
+    // Admin creates template
+    subgraph cluster_setup {
+        label=<<FONT POINT-SIZE="12" COLOR="#1e4974"><B>One-Time Setup (Conference Admin)</B></FONT>>;
+        style="rounded,filled"; fillcolor="#f0f4f8"; color="#1e4974"; margin=15;
+
+        admin_creates [label="Conference Admin\ncreates form template\n(Medical, Consent,\nPermission Slip)", fillcolor="#163b62", fontcolor="white"];
+    }
+
+    // Director invites
+    subgraph cluster_director {
+        label=<<FONT POINT-SIZE="12" COLOR="#1e4974"><B>Director</B></FONT>>;
+        style="rounded,filled"; fillcolor="#f0f4f8"; color="#1e4974"; margin=15;
+
+        invite [label="Director sends\ninvitation link\nto parents", fillcolor="#1e4974", fontcolor="white"];
+        status [label="Director views\nform status grid\nfor every child\nin their club", fillcolor="#1e4974", fontcolor="white"];
+        review [label="Director approves\nsubmission\n(if review required)", fillcolor="#2563ae", fontcolor="white"];
+    }
+
+    // Parent submits
+    subgraph cluster_parent {
+        label=<<FONT POINT-SIZE="12" COLOR="#1e4974"><B>Parent / Guardian</B></FONT>>;
+        style="rounded,filled"; fillcolor="#f8f4e8"; color="#1e4974"; margin=15;
+
+        register [label="Parent creates\naccount via\ninvitation link", fillcolor="#fea941", fontcolor="#1e4974"];
+        children [label="Parent registers\ntheir children", fillcolor="#fea941", fontcolor="#1e4974"];
+        submit [label="Parent fills out\nrequired forms\non their phone", fillcolor="#fea941", fontcolor="#1e4974"];
+        track [label="Parent sees\nstatus of all\nform requests", fillcolor="#fea941", fontcolor="#1e4974"];
+    }
+
+    // Result
+    complete [label="✅ All forms complete\nChild is cleared\nfor participation", fillcolor="#2e7d32", fontcolor="white"];
+
+    missing [label="⚠️ Forms missing\nor expired?\nParent is notified\nautomatically", fillcolor="#fff3e0", fontcolor="#e65100", color="#e65100"];
+
+    // Flow
+    admin_creates -> invite [label="  forms available  "];
+    invite -> register [label="  parent clicks link  "];
+    register -> children [label="  adds children  "];
+    children -> submit [label="  fills forms  "];
+    submit -> review [label="  submitted  "];
+    submit -> track [label="  can check status  ", style=dashed];
+    review -> status [label="  updates grid  "];
+    review -> complete [label="  approved  "];
+    status -> missing [label="  flags incomplete  ", style=dashed, color="#e65100"];
+    missing -> submit [label="  parent notified  ", style=dashed, color="#e65100"];
+}

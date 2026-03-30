@@ -1,0 +1,78 @@
+digraph SystemOverview {
+    rankdir=TB;
+    bgcolor="white";
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=11, style="filled", color="#1e4974", fontcolor="white"];
+    edge [fontname="Helvetica", fontsize=9, color="#555555"];
+
+    // Title
+    labelloc="t";
+    label=<<FONT POINT-SIZE="18" COLOR="#1e4974"><B>GNYC Youth Digital Ecosystem — System Overview</B></FONT>>;
+
+    // Subgraph: Users
+    subgraph cluster_users {
+        label=<<FONT POINT-SIZE="13" COLOR="#1e4974"><B>Who Uses the System</B></FONT>>;
+        style="rounded,filled";
+        fillcolor="#f0f4f8";
+        color="#1e4974";
+        margin=20;
+
+        directors [label="Directors\n─────────────\nSubmit reports\nManage roster\nContact directors", shape=box, fillcolor="#1e4974", style="rounded,filled"];
+        staff [label="Club Staff\n─────────────\nView roster\nView form status\nSubmit reports", shape=box, fillcolor="#2563ae", style="rounded,filled"];
+        parents [label="Parents / Guardians\n──────────────────\nSubmit forms\nManage children\nView form requests", shape=box, fillcolor="#2563ae", style="rounded,filled"];
+        coordinators [label="Coordinators\n─────────────\nApprove reports\nView club health\nView area data", shape=box, fillcolor="#163b62", style="rounded,filled"];
+        admin [label="Conference Admin\n────────────────\nManage content\nManage store\nCreate form templates", shape=box, fillcolor="#163b62", style="rounded,filled"];
+        everyone [label="Everyone\n─────────────\nAsk the AI Assistant\nBrowse resources\nView events", shape=box, fillcolor="#fea941", fontcolor="#1e4974", style="rounded,filled"];
+    }
+
+    // Subgraph: Website
+    subgraph cluster_website {
+        label=<<FONT POINT-SIZE="13" COLOR="#1e4974"><B>gnycyouth.org</B></FONT>>;
+        style="rounded,filled";
+        fillcolor="#e8edf3";
+        color="#1e4974";
+        margin=20;
+
+        public_site [label="🌐 Public Website\n──────────────\nPages, events,\nresources, store", shape=box, fillcolor="white", fontcolor="#1e4974", style="rounded,filled"];
+        portal [label="📊 Leader Portal\n──────────────\nReports, roster,\nforms, dashboard", shape=box, fillcolor="white", fontcolor="#1e4974", style="rounded,filled"];
+        ai [label="💬 AI Assistant\n──────────────\nAnswers questions,\ncoaches, translates", shape=box, fillcolor="white", fontcolor="#1e4974", style="rounded,filled"];
+    }
+
+    // Subgraph: Backend Systems
+    subgraph cluster_backend {
+        label=<<FONT POINT-SIZE="13" COLOR="#1e4974"><B>Backend Systems (Conference-Owned, $0 Licensing)</B></FONT>>;
+        style="rounded,filled";
+        fillcolor="#f8f4e8";
+        color="#1e4974";
+        margin=20;
+
+        wordpress [label="WordPress\n──────────────\nContent, manuals,\nvideos, events", shape=box, fillcolor="#21759b", style="rounded,filled"];
+        espocrm [label="EspoCRM\n──────────────\nPeople, clubs,\nchildren, parents,\ncerts, reports", shape=box, fillcolor="#1e4974", style="rounded,filled"];
+        woocommerce [label="WooCommerce\n──────────────\nYouth Store,\nuniforms, curriculum", shape=box, fillcolor="#7f54b3", style="rounded,filled"];
+    }
+
+    // Security footer
+    security [label="🔒 Protected by Cloudflare Security + Encrypted Daily Backups\n💰 Total Cost: ~$60-90/month  |  All Software: $0 Licensing", shape=box, fillcolor="#e8f5e9", fontcolor="#2e7d32", style="rounded,filled", color="#2e7d32"];
+
+    // Edges from users to website
+    directors -> portal [lhead=cluster_website];
+    staff -> portal [lhead=cluster_website];
+    parents -> portal [lhead=cluster_website];
+    coordinators -> portal [lhead=cluster_website];
+    admin -> public_site [lhead=cluster_website];
+    everyone -> ai [lhead=cluster_website];
+
+    // Edges from website to backend
+    public_site -> wordpress;
+    portal -> espocrm;
+    portal -> wordpress [style=dashed];
+    ai -> wordpress [style=dashed];
+    ai -> espocrm [style=dashed];
+    ai -> woocommerce [style=dashed];
+    public_site -> woocommerce;
+
+    // Security
+    wordpress -> security [style=invis];
+    espocrm -> security [style=invis];
+    woocommerce -> security [style=invis];
+}
