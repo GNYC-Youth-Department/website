@@ -1,0 +1,34 @@
+digraph ReportingWorkflow {
+    rankdir=LR;
+    bgcolor="white";
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=11, style="filled,rounded", shape=box];
+    edge [fontname="Helvetica", fontsize=9, color="#555555"];
+
+    labelloc="t";
+    label=<<FONT POINT-SIZE="18" COLOR="#1e4974"><B>Monthly Reporting Workflow</B></FONT>>;
+
+    // Steps
+    director [label="📱 Director\nsubmits report\nfrom phone\n(< 3 minutes)", fillcolor="#1e4974", fontcolor="white"];
+
+    prefill [label="📋 System\npre-fills with\nlast month's\ndata", fillcolor="#e8edf3", fontcolor="#1e4974", color="#1e4974"];
+
+    submit [label="✅ Report\nsubmitted\n(works offline)", fillcolor="#2563ae", fontcolor="white"];
+
+    notify [label="📧 Coordinator\nautomatically\nnotified", fillcolor="#fea941", fontcolor="#1e4974", color="#1e4974"];
+
+    review [label="👀 Coordinator\nreviews &\napproves", fillcolor="#163b62", fontcolor="white"];
+
+    dashboard [label="📊 Conference\ndashboard\nupdates instantly", fillcolor="#2e7d32", fontcolor="white"];
+
+    // Flow
+    director -> prefill [label="  opens form  "];
+    prefill -> submit [label="  updates & sends  "];
+    submit -> notify [label="  automatic  "];
+    notify -> review [label="  clicks to review  "];
+    review -> dashboard [label="  on approval  "];
+
+    // Offline note
+    offline [label="📡 No signal?\nReport saves locally\nand syncs automatically\nwhen connected", fillcolor="#fff3e0", fontcolor="#e65100", color="#e65100", shape=note];
+    submit -> offline [style=dashed, color="#e65100", dir=none];
+}
