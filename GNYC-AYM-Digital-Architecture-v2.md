@@ -1,12 +1,18 @@
 # GNYC Adventist Youth Ministries — Digital Ecosystem Architecture
 
-**Version:** 2.3
+**Version:** 2.4
 **Date:** March 18, 2026
 **Status:** Draft — For Review
 **Audience:** Director of AYM, Development Team, Stakeholders
 **Previous Version:** [v1 — Headless Architecture](./GNYC-AYM-Digital-Architecture-v1.md)
 
 ---
+## Changelog from v2.3
+
+| Change | Rationale |
+|--------|-----------|
+| Expanded role matrix to 11 tiers	 | Added `Admin Assit.`, `Registrar`, `Instructor`, `Store Manager` and `Store Staff`  |
+
 ## Changelog from v2.2
 
 | Change | Rationale |
@@ -1079,40 +1085,42 @@ WordPress handles content and financial transactions (WooCommerce). These are no
 
 ### 9.5 Role-Based Permissions Matrix
 
-| Action | Admin | Lead Coordinator | Area Coordinator| Director | Staff | Parent/Guardian |
-|---|---|---|---|---|---|---|
-| **Own Profile** | | | | | |
-| Update own information | Yes | Yes | Yes | Yes | Yes | Yes |
+| Action | Admin | Admin Asst. | Registrar | Instructor | Lead Coordinator | Area Coordinator| Director | Staff | Parent/Guardian | Store Manager | Store Staff|
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Own Profile** | | | | | | |
+| Update own information | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | **Children & Roster** | | | | | |
-| View registered children in club | All clubs | Area clubs | Assigned clubs  | Own club | Own club | No |
-| Add children in club | All clubs | Area clubs | Assigned clubs | Own club | No | Own children only |
-| Modify children in club | All clubs | Area clubs |  Assigned clubs | Own club | Yes | Own children only |
-| Create children (new enrollment) | Yes | Yes | Assigned clubs | Yes | No | Yes — own children |
+| View registered children in club | All clubs | All clubs | | | Area clubs | Assigned clubs  | Own club | Own club | No | No | No |
+| Add children in club | All clubs |  All clubs | | | Area clubs | Assigned clubs | Own club | No | Own children only | No | No |
+| Modify children in club | All clubs |  All clubs | | | Area clubs |  Assigned clubs | Own club | Yes | Own children only | No | No |
+| Create children (new enrollment) | Yes | Yes | | | | Assigned clubs | Yes | No | Yes — own children | No | No |
 | **Parent/Guardian Records** | | | | | |
-| Add parent/guardian | All | Area | Assigned clubs | Own club | No | Own record only |
-| Modify parent/guardian | All | Area | Assigned clubs | Own club | Own club | Own record only |
-| View parent/guardian contact info | All | Area | Assigned clubs | Own club | Own club | Own children only |
+| Add parent/guardian | All | All | | | No| Assigned clubs | Own club | No | Own record only | No | No |
+| Modify parent/guardian | All | All | | | No | Assigned clubs | Own club | Own club | Own record only | No | No |
+| View parent/guardian contact info | All | All | | | Area | Assigned clubs | Own club | Own club | Own children only | No | No |
 | **Forms** | | | | | |
-| Create / manage form templates | Yes | No | No | No | No | No |
-| View form status for children in club | All clubs | Area clubs | Assigned clubs | Own club | Own club | No |
-| Submit forms on behalf of children | No | No  | No | No | No | Yes — own children |
-| View form requests and status | No | No  | No | Own club | Own club | Yes — own children |
+| Create / manage form templates | Yes | Yes | | | No | No | No | No | No | No | No |
+| View form status for children in club | All clubs | All clubs | | | Area clubs | Assigned clubs | Own club | Own club | No | No | No |
+| Submit forms on behalf of children | No | No | No | No  | No | No | No | No | Yes — own children | No | No |
+| View form requests and status | Yes | Yes  | No | No | No | No | Own club | Own club | Yes — own children  | No | No |
 | **Club Reports** | | | | | |  |
-| Submit monthly reports | No | No  | No | Yes | Yes | No |
-| Review / approve reports | All | Area clubs  | Assigned clubs | No | No | No |
-| View conference-wide analytics | Yes | Yes  | No | No | No | No |
+| Submit monthly reports | No | No | No | No | No | No | Yes | Yes | No | No | No |
+| Approve reports | All | No | | | | Area clubs  | Assigned clubs | No | No | No | No |
+| Review reports | All | All | | | Area clubs  | Assigned clubs | No | No | No | No | No |
+| View conference-wide analytics | Yes | Yes | Yes | | | No | No | No | No | No | No |
 | **Coordinator Reports** | | | | | |  |
-| Submit monthly reports | No | Yes  | Yes | No | No | No |
-| Review / approve reports | Yes | Area clubs  | No | No | No | No |
-| View conference-wide analytics | Yes | No  | No | No | No | No |
+| Submit monthly reports | No | Yes  | Yes | No | No | No | No | No | No | No | No |
+| Approve reports | Yes | No | | | | Area clubs  | No | No | No | No | No |
+| Review reports | Yes | Yes | | | | Area clubs | No | No | No | No | No |
+| View conference-wide analytics | Yes | Yes | | | | No  | No | No | No | No | No |
 | **Communication** | | | | | | |
-| Contact directors via email | Yes | Yes | Yes | Yes | Own club | Own club |
-| Send notifications | Yes | Area clubs | Assigned clubs | Own club | No | No |
+| Contact directors via email | Yes | Yes | | | Yes |  Yes | Own club | Own club |
+| Send notifications | Yes | Yes | | | | Area clubs | Assigned clubs | No | No | No | No |
 | **System** | | | | | | |
-| Manage WordPress content | Yes | No  | No | No | No | No |
-| Manage WooCommerce store | Yes | No  | No | No | No | No |
-| Manage EspoCRM entities | Yes | Limited  | Limited | No | No | No |
-| Force-logout users | Yes | No  | No | No | No | No |
+| Manage WordPress content | Yes | Limited | | | No  | No | No | No | No | No | No |
+| Manage WooCommerce store | Yes | Yes | | | No  | No | No | No | No | Yes | Limited |
+| Manage EspoCRM entities | Yes | Limited | | |Limited  | Limited | No | No | No | No | No |
+| Force-logout users | Yes | Yes | | | No  | No | No | No | No | No | No | No | No |
 ---
 
 ## 10. HCI & User Experience Architecture
